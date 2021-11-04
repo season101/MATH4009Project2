@@ -4,14 +4,18 @@ def gcd(a,b):
         return a
     else:
         return gcd(b,a%b)
-n= random.randint(2,10000)
 
-while gcd(n,2310)==1:
+n =0
+
+while gcd(n,2310)!=1:
     n= random.randint(2,10000)
+
+print(n)
 
 k = random.getrandbits(100)
 x = 2310*k + n
-
+print(k)
+print(x)
 def miller_rabin(n, k):
 
     # Implementation uses the Miller-Rabin Primality Test
@@ -59,6 +63,8 @@ x = 2310*k + n
 while(miller_rabin(x,k) is False):
     k = random.getrandbits(100)
     x = 2310*k + n
+    print(k)
+    print(x)
 
 
 

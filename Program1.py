@@ -1,76 +1,123 @@
 import random
+
 def gcd(a,b):
+   
     if(b==0):
         return a
     else:
         return gcd(b,a%b)
 
-n =0
+n = random.randint(1,10000)
 
 while gcd(n,2310)!=1:
-    n= random.randint(2,10000)
+    n= random.randint(1,10000)
 
 print(n)
 
 k = random.getrandbits(100)
 x = 2310*k + n
-print(k)
-print(x)
-def miller_rabin(n, k):
-
-    # Implementation uses the Miller-Rabin Primality Test
-    # The optimal number of rounds for this test is 40
-    # See http://stackoverflow.com/questions/6325576/how-many-iterations-of-rabin-miller-should-i-use-for-cryptographic-safe-primes
-    # for justification
-
-    # If number is even, it's a composite number
-
-    if n == 2:
-        return True
-
-    if n % 2 == 0:
-        return False
-    if k == 1 or gcd(n,k) >1:
-        print("test fail")
-        return False
-    temp = n-1
-    counter = 0
-    while temp % 2 == 0:
-        temp = temp//2
-        counter+=1
-
-    for p in range(k):
-        a = random.randrange(2, n - 1)
-        x = pow(a, temp, n)
-        if x == 1 or x == n - 1:
-            continue
-        for _ in range(counter - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                break
-        else:
-            return False
-    return True
-
-n= random.randint(2,10000)
-
-while gcd(n,2310)==1:
-    n= random.randint(2,10000)
-
-k = random.getrandbits(100)
-x = 2310*k + n
-
-while(miller_rabin(x,k) is False):
-    k = random.getrandbits(100)
-    x = 2310*k + n
-    print(k)
-    print(x)
+# print(k)
+# print(x)
 
 
-
-
-
-
+# Utility function to do
+# modular exponentiation.
+# It returns (x^y) % p
+def power(x, y, p):
+     
+    # Initialize result
+    res = 1;
+     
+    # Update x if it is more than or
+    # equal to p
+    x = x % p;
+    while (y > 0):
+         
+        # If y is odd, multiply
+        # x with result
+        if (y & 1):
+            res = (res * x) % p;
+ 
+        # y must be even now
+        y = y>>1; # y = y/2
+        x = (x * x) % p;
+     
+    return res;
+ 
+# This function is called
+# for all k trials. It returns
+# false if n is composite and
+# returns false if n is
+# probably prime. d is an odd
+# number such that d*2<sup>r</sup> = n-1
+# for some r >= 1
+def miillerTest(d, n):
+     
+    # Pick a random number in [2..n-2]
+    # Corner cases make sure that n > 4
+    a = 2 + random.randint(1, n - 4);
+ 
+    # Compute a^d % n
+    x = power(a, d, n);
+ 
+    if (x == 1 or x == n - 1):
+        return True;
+ 
+    # Keep squaring x while one
+    # of the following doesn't
+    # happen
+    # (i) d does not reach n-1
+    # (ii) (x^2) % n is not 1
+    # (iii) (x^2) % n is not n-1
+    while (d != n - 1):
+        x = (x * x) % n;
+        d *= 2;
+ 
+        if (x == 1):
+            return False;
+        if (x == n - 1):
+            return True;
+ 
+    # Return composite
+    return False;
+ 
+# It returns false if n is
+# composite and returns true if n
+# is probably prime. k is an
+# input parameter that determines
+# accuracy level. Higher value of
+# k indicates more accuracy.
+def isPrime( n, k):
+     
+    # Corner cases
+    if (n <= 1 or n == 4):
+        return False;
+    if (n <= 3):
+        return True;
+ 
+    # Find r such that n =
+    # 2^d * r + 1 for some r >= 1
+    d = n - 1;
+    while (d % 2 == 0):
+        d //= 2;
+ 
+    # Iterate given nber of 'k' times
+    for i in range(k):
+        if (miillerTest(d, n) == False):
+            return False;
+ 
+    return True;
+ 
+# Driver Code
+# Number of iterations
+k = 4;
+ 
+print("All primes smaller than 100: ");
+# for n in range(1,100):
+if (isPrime(100, k)):
+    print(str(n)+"is Prime.");
+ 
+# This code is contributed by mits
 
 
 

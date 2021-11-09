@@ -1,27 +1,3 @@
-import random
-
-def gcd(a,b):
-   
-    if(b==0):
-        return a
-    else:
-        return gcd(b,a%b)
-
-n = random.randint(1,10000)
-
-while gcd(n,2310)!=1:
-    n= random.randint(1,10000)
-
-print(n)
-
-k = random.getrandbits(100)
-x = 2310*k + n
-print(k)
-print(x)
-
-
-
-
 
 # Python3 program Miller-Rabin primality test 
 import random  

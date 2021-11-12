@@ -32,7 +32,7 @@ Our code for Program is
 
 	### 3. Miller Rabin's Primality Test
 	def MillerRabinTest(p,a):
-		
+okok9o9		
 		# Base case - 1 not prime
 		if p == 1:
 			return False
@@ -69,7 +69,7 @@ Our code for Program is
 # Method to call on Miller Rabin Test to check if number 'p' is prime or not with witness a.
 	def isPrime(p):
 		
-		# 'a': a witness number between 2 and 'p' for which we check if it is relatively prime o a or not.
+		# 'a': a witness number between 2 and 'p' for which we check if it is relatively prime to a or not.
 		a =random.randint(2,p-1)
 		if not MillerRabinTest(p,a):
 			return False
@@ -663,8 +663,11 @@ We got our prime numbers in 13.6 Average Tries.
 Prime Number Found Are:
 ---
 1. 2740191632737638230351080185824513 is prime length:34
+
 2. 954938078640673960538539639894553 is prime length:33
+
 3. 636813314555617301245044809328361 is prime length:33
+
 4. 2735309488325962569666276808660219 is prime length:34
 5. 94273196412083492496069210636059 is prime length:32
 6. 1047408260875065350699903848208191 is prime length:34
